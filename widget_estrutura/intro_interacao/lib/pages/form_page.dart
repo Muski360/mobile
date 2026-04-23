@@ -10,6 +10,7 @@
 //form => ajuda na validação de dados
 
 import 'package:flutter/material.dart';
+import 'package:intro_interacao/widgets/bnb.dart';
 
 //chama as mudança de estado
 class FormPage extends StatefulWidget {
@@ -103,7 +104,6 @@ class _FormPageState extends State<FormPage> {
                   //icone para mostrar ou esconder a senha
                 ),
 
-
                 //campo confirmar senha
                 SizedBox(height: 20),
                 TextFormField(
@@ -123,17 +123,265 @@ class _FormPageState extends State<FormPage> {
                   onChanged: (value) => setState(() {
                     _confirmarSenha = value;
                   }),
-                  validator: (value) => value! != _senha
-                      ? "Sua senha deve ser a mesma!"
-                      : null,
+                  validator: (value) =>
+                      value! != _senha ? "Sua senha deve ser a mesma!" : null,
                   obscureText: _obscureSenha, //esconder senha
                   //icone para mostrar ou esconder a senha
                 ),
+                //radio button => sexo
+                SizedBox(height: 20),
+                // //forma antiga
+                // Row(
+                //   children: [
+                //     Text("Sexo:"),
+                //     SizedBox(width: 5),
+                //     Radio(
+                //       value: "Feminino",
+                //       groupValue: _sexo,
+                //       onChanged: (value) => setState(() => _sexo = value!),
+                //     ),
+                //     Text("Feminino"),
+                //     SizedBox(width: 5),
+                //     Radio(
+                //       value: "Masculino",
+                //       groupValue: _sexo,
+                //       onChanged: (value) => setState(() => _sexo = value!),
+                //     ),
+                //     Text("Masculino"),
+                //     SizedBox(width: 5),
+                //     Radio(
+                //       value: "Outro",
+                //       groupValue: _sexo,
+                //       onChanged: (value) => setState(() => _sexo = value!),
+                //     ),
+                //     Text("Outro"),
+                //   ],
+                // ),
+                //Radio Versão Nova
+                //RadioGroup
+                RadioGroup<String>(
+                  groupValue: _sexo,
+                  onChanged: (String? value) => setState(() => _sexo = value!),
+                  child: Row(
+                    children: [
+                      Text("Sexo:"),
+                      SizedBox(width: 5),
+                      Radio(value: "Feminino"),
+                      Text("Feminino"),
+                      SizedBox(width: 5),
+                      Radio(value: "Masculino"),
+                      Text("Masculino"),
+                      SizedBox(width: 5),
+                      Radio(value: "Outro"),
+                      Text("Outro"),
+                    ],
+                  ),
+                ),
+                //Slider para seleção de idade
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    Text(
+                      "Idade: ${_idade.toInt()}",
+                    ), //exibir a idade selecionada
+                    Expanded(
+                      child: Slider(
+                        value: _idade,
+                        onChanged: (value) => setState(() => _idade = value),
+                        min: 0,
+                        max: 100,
+                        divisions: 100, // nº de divisões do slider
+                        label: _idade.toInt().toString(),
+                      ),
+                    ),
+                  ],
+                ),
+                //CheckBox para selecionar Interesses
+                SizedBox(height: 20),
+                Column(
+                  children: [
+                    Text("Interesses Pessoais:"),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: _interesses.contains("Música"),
+                          onChanged: (bool? value) => setState(() {
+                            value!
+                                ? _interesses.add("Música")
+                                : _interesses.remove("Música");
+                          }),
+                        ),
+                        Text("Música"),
+                        SizedBox(width: 5),
+                        Checkbox(
+                          value: _interesses.contains("Viagens"),
+                          onChanged: (bool? value) => setState(() {
+                            value!
+                                ? _interesses.add("Viagens")
+                                : _interesses.remove("Viagens");
+                          }),
+                        ),
+                        Text("Viagens"),
+                        SizedBox(width: 5),
+                        Checkbox(
+                          value: _interesses.contains("Esporte"),
+                          onChanged: (bool? value) => setState(() {
+                            value!
+                                ? _interesses.add("Esporte")
+                                : _interesses.remove("Esporte");
+                          }),
+                        ),
+                        Text("Esporte"),
+                        SizedBox(width: 5),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: _interesses.contains("Cinema"),
+                          onChanged: (bool? value) => setState(() {
+                            value!
+                                ? _interesses.add("Cinema")
+                                : _interesses.remove("Cinema");
+                          }),
+                        ),
+                        Text("Cinema"),
+                        SizedBox(width: 5),
+                        Checkbox(
+                          value: _interesses.contains("Teatro"),
+                          onChanged: (bool? value) => setState(() {
+                            value!
+                                ? _interesses.add("Teatro")
+                                : _interesses.remove("Teatro");
+                          }),
+                        ),
+                        Text("Teatro"),
+                        SizedBox(width: 5),
+                        Checkbox(
+                          value: _interesses.contains("Estudar"),
+                          onChanged: (bool? value) => setState(() {
+                            value!
+                                ? _interesses.add("Estudar")
+                                : _interesses.remove("Estudar");
+                          }),
+                        ),
+                        Text("Estudar"),
+                        SizedBox(width: 5),
+                      ],
+                    ),
+                  ],
+                ),
+                //dropdown Cidades
+                SizedBox(height: 20),
+                Text("Cidade"),
+                DropdownButtonFormField(
+                  //criar uma bordar na caixa de dropdown
+                  decoration: InputDecoration(border: OutlineInputBorder()),
+                  // items: [
+                  //   DropdownMenuItem(child: Text("Americana"), value: "Americana",),
+                  //   DropdownMenuItem(child: Text("Campinas"), value: "Campinas",),
+                  //   DropdownMenuItem(child: Text("Nova Odessa"), value: "Nova Odessa",),
+                  //   DropdownMenuItem(child: Text("Santa Bárbara d'Oeste"), value: "Santa Bárbara d'Oeste",),
+                  //   DropdownMenuItem(child: Text("Sumaré"), value: "Sumaré",),
+                  //   DropdownMenuItem(child: Text("Piracicaba"), value: "Piracicaba",),
+                  //   DropdownMenuItem(child: Text("Outra"), value: "Outra",),
+                  // ],
+                  items:
+                      [
+                            "Americana",
+                            "Campinas",
+                            "Nova Odessa",
+                            "Santa Bárbara d'Oeste",
+                            "Sumaré",
+                            "Piracicaba",
+                            "Paulínia"
+                                "Sorocaba"
+                                "Outra",
+                          ]
+                          .map(
+                            (cidade) => DropdownMenuItem(
+                              value: cidade,
+                              child: Text(cidade),
+                            ),
+                          )
+                          .toList(),
+                  onChanged: (value) => setState(() => _cidade = value!),
+                ),
+                //switch para aceitar os termos de uso!
+                Row(
+                  children: [
+                    Switch(
+                      value: _aceitarTermos,
+                      onChanged: (bool value) =>
+                          setState(() => _aceitarTermos = value),
+                    ),
+                    Text("Aceitar termos de uso"),
+                  ],
+                ),
+                //Botão de enviar o Formulário
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () => _enviarFormulario(),
+                  child: Text("Enviar Formulário"),
+                ),
               ],
+
+              //usando map
             ),
           ),
         ),
       ),
+      bottomNavigationBar: bnb(context),
     );
+  }
+
+  void _enviarFormulario() {
+    //verificar os termos do formulário (validação)
+    //mostrar um AlertDialog (modal de alerta)
+    if (formKey.currentState!.validate() && _aceitarTermos) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Dados do Formulário"),
+          content: SingleChildScrollView(
+            // permite a rolagem do modal
+            child: ListBody(
+              children: [
+                Text("Nome: $_nome"),
+                Text("Email: $_email"),
+                Text("Senha: $_senha"),
+                Text("Sexo: $_sexo"),
+                Text("Idade ${_idade.toInt()}"),
+                Text("Interesses: ${_interesses.join(", ")}"),
+              ],
+            ),
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                //sem arrow function para fazer várias ações
+                //limpar as repostas
+                setState(() {
+                  _nome = "";
+                  _email = "";
+                  _senha = "";
+                  _confirmarSenha = "";
+                  _aceitarTermos = false;
+                  _sexo = "Feminino"; //radio (femino)
+                  _idade = 18; // slider -> posição 18
+                  _interesses = [];
+                  _cidade = "Americana";
+                  _obscureSenha = true;
+                  formKey.currentState!
+                      .reset(); //reseta a validação do formulário
+                });
+                Navigator.popAndPushNamed(context, "/");
+              },
+              child: Text("Ok"),
+            ),
+          ],
+        ),
+      );
+    }
   }
 }

@@ -23,7 +23,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // classe normal da aplicação
   //atributos
-  int contador = 0;
+  int contador = 6767676767676767;
 
   //método build da tela (obrigatório)
   @override
