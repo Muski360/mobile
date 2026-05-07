@@ -1,5 +1,5 @@
 /# Gerenciador de Tarefas com Dashboard e Provider
-a
+
 Especificações dos Requisitos de Software (SRE)
 Documentação Baseada na ISO/IEEE/IEC 29148:2018
 
